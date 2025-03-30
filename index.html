@@ -13,6 +13,7 @@
       height: 100%;
       background-color: #000;
       color: white;
+      scroll-behavior: smooth;
     }
     .hero {
       position: relative;
@@ -102,15 +103,11 @@
       border-radius: 4px;
     }
     .section {
-      display: none;
       background-color: #111;
       padding: 60px 20px;
       text-align: left;
       font-size: 1.25rem;
       line-height: 2;
-    }
-    .section.show {
-      display: block;
     }
     .logo {
       position: absolute;
@@ -121,16 +118,11 @@
       z-index: 3;
     }
   </style>
-  <script>
-    function toggleSection() {
-      document.getElementById('purpose').classList.toggle('show');
-    }
-  </script>
 </head>
 <body>
   <img src="meonjijinyum.png" alt="로고" class="logo">
   <nav>
-    <button class="menu-button" onclick="toggleSection()">프로젝트의 취지</button>
+    <a href="#purpose" class="menu-button">프로젝트의 취지</a>
   </nav>
 
   <div class="hero">

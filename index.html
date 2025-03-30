@@ -18,26 +18,24 @@
     .hero {
       position: relative;
       height: 100vh;
-      color: white;
       display: flex;
       align-items: center;
-      padding: 0 10%;
-      flex-direction: column;
       justify-content: center;
+      flex-direction: column;
       text-align: left;
       overflow: hidden;
     }
     .hero video {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       object-fit: cover;
       z-index: -2;
     }
     .overlay {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
@@ -48,6 +46,7 @@
     .content {
       position: relative;
       z-index: 1;
+      padding: 0 10%;
     }
     .headline {
       font-size: 4.5rem;
@@ -91,7 +90,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 2;
+      z-index: 3;
     }
     .menu-button {
       background: none;
@@ -120,17 +119,17 @@
   </style>
 </head>
 <body>
+  <video autoplay muted loop playsinline>
+    <source src="seoulgangnamcity.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
   <img src="meonjijinyum.png" alt="로고" class="logo">
   <nav>
     <a href="#purpose" class="menu-button">프로젝트의 취지</a>
   </nav>
 
   <div class="hero">
-    <video autoplay muted loop>
-      <source src="seoulgangnamcity.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="overlay"></div>
     <div class="content">
       <div class="headline delay-1">학원비를 환급 받는</div>
       <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>

@@ -6,36 +6,41 @@
   <title>학원비 환급</title>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&display=swap" rel="stylesheet">
   <style>
-    body, html {
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
       margin: 0;
       padding: 0;
       font-family: 'Raleway', sans-serif;
-      height: 100%;
       background-color: #000;
       color: white;
       scroll-behavior: smooth;
+      height: 100%;
+      overflow-x: hidden;
     }
     .hero {
       position: relative;
       height: 100vh;
+      width: 100vw;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      text-align: left;
       overflow: hidden;
+      text-align: left;
     }
     .background-video {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       z-index: -2;
     }
     .overlay {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
@@ -44,8 +49,7 @@
       z-index: -1;
     }
     .content {
-      position: relative;
-      z-index: 2;
+      z-index: 1;
       padding: 0 10%;
     }
     .headline {
@@ -90,7 +94,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 3;
+      z-index: 2;
     }
     .menu-button {
       background: none;
@@ -101,13 +105,6 @@
       cursor: pointer;
       border-radius: 4px;
     }
-    .section {
-      background-color: #111;
-      padding: 60px 20px;
-      text-align: left;
-      font-size: 1.25rem;
-      line-height: 2;
-    }
     .logo {
       position: absolute;
       top: 20px;
@@ -116,7 +113,27 @@
       height: auto;
       z-index: 3;
     }
+    #purpose {
+      display: none;
+      background-color: #111;
+      padding: 60px 20px;
+      text-align: left;
+      font-size: 1.25rem;
+      line-height: 2;
+    }
+    #purpose.show {
+      display: block;
+    }
   </style>
+  <script>
+    function toggleSection() {
+      const section = document.getElementById('purpose');
+      section.classList.toggle('show');
+      if (section.classList.contains('show')) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
 </head>
 <body>
   <video class="background-video" autoplay muted loop playsinline>
@@ -126,7 +143,7 @@
   <div class="overlay"></div>
   <img src="meonjijinyum.png" alt="로고" class="logo">
   <nav>
-    <a href="#purpose" class="menu-button">프로젝트의 취지</a>
+    <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
   </nav>
 
   <div class="hero">
@@ -138,7 +155,7 @@
     </div>
   </div>
 
-  <div id="purpose" class="section">
+  <div id="purpose">
     <p><strong>전국의 초등학생 부모님!</strong></p>
     <p>매 분기, 매 년 학원비는 오르는데, 월급만 안 오른다는 말은 이제 너무 진부해진 표현이 되어 버린 건가요?</p>
     <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비, 서슬 퍼런 은행 대출 상환일 등등</p>
@@ -148,5 +165,6 @@
   </div>
 </body>
 </html>
+
 
 

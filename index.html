@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>학원비 환급</title>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&display=swap" rel="stylesheet">
+  <title>학원비 환급 프로젝트</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -12,7 +12,7 @@
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Noto Sans KR', 'Raleway', sans-serif;
       background-color: #000;
       color: white;
       scroll-behavior: smooth;
@@ -22,22 +22,33 @@
     .hero {
       position: relative;
       height: 100vh;
-      width: 100vw;
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
       text-align: left;
     }
-    .background-video {
+    .video-container {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .background-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      z-index: 0;
       object-fit: cover;
-      z-index: -2;
     }
     .overlay {
       position: absolute;
@@ -45,16 +56,18 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.4);
-      z-index: -1;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
     }
     .content {
-      z-index: 1;
+      position: relative;
+      z-index: 2;
       padding: 0 10%;
+      width: 100%;
     }
     .headline {
       font-size: 4.5rem;
-      font-weight: 200;
+      font-weight: 300;
       line-height: 1.2;
       margin-bottom: 1.5rem;
       opacity: 0;
@@ -80,6 +93,8 @@
       opacity: 0;
       animation: fadeIn 1s ease forwards;
       animation-delay: 4.5s;
+      text-decoration: none;
+      display: inline-block;
     }
     .button:hover {
       background-color: #eee;
@@ -94,7 +109,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 2;
+      z-index: 3;
     }
     .menu-button {
       background: none;
@@ -124,8 +139,102 @@
     #purpose.show {
       display: block;
     }
+    
+    /* PC 스타일 - 기본 */
+    .pc-version {
+      display: block;
+    }
+    .mobile-version {
+      display: none;
+    }
+    
+    /* 모바일 스타일 */
+    @media (max-width: 768px) {
+      .pc-version {
+        display: none;
+      }
+      .mobile-version {
+        display: block;
+      }
+      
+      .headline {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .button {
+        padding: 0.6rem 1.2rem;
+        font-size: 1rem;
+      }
+      
+      .logo {
+        width: 45px;
+        top: 15px;
+        left: 15px;
+      }
+      
+      .menu-button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+      
+      #purpose {
+        padding: 40px 15px;
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+      
+      /* 모바일에서는 헤드라인 간격 조정 */
+      .headline.delay-1 {
+        animation-delay: 0s;
+      }
+      .headline.delay-2 {
+        animation-delay: 1s;
+      }
+      .headline.delay-3 {
+        animation-delay: 2s;
+      }
+      .button {
+        animation-delay: 3s;
+      }
+    }
+    
+    /* 작은 모바일 화면 추가 최적화 */
+    @media (max-width: 480px) {
+      .headline {
+        font-size: 1.8rem;
+      }
+      
+      .content {
+        padding: 0 7%;
+      }
+    }
   </style>
   <script>
+    // 기기 타입 감지
+    function detectDeviceType() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android|iPad|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+        return 'mobile';
+      }
+      return 'desktop';
+    }
+    
+    // 페이지 로드 시 적절한 버전 표시
+    window.addEventListener('DOMContentLoaded', function() {
+      const deviceType = detectDeviceType();
+      
+      // 비디오 로드 및 재생
+      const video = document.querySelector('.background-video');
+      video.play().catch(function(error) {
+        console.log("Video play failed:", error);
+        document.querySelector('.hero').style.backgroundColor = '#000';
+      });
+      
+      // 자동으로 기기 감지하여 클래스 추가
+      document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');
+    });
+
     function toggleSection() {
       const section = document.getElementById('purpose');
       section.classList.toggle('show');
@@ -136,22 +245,53 @@
   </script>
 </head>
 <body>
-  <video class="background-video" autoplay muted loop playsinline>
-    <source src="/seoulgangnamcity.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div class="overlay"></div>
-  <img src="meonjijinyum.png" alt="로고" class="logo">
-  <nav>
-    <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
-  </nav>
+  <!-- PC 버전 -->
+  <div class="pc-version hero">
+    <div class="video-container">
+      <video class="background-video" autoplay muted loop playsinline>
+        <source src="seoulgangnamcity.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="overlay"></div>
+    </div>
+    
+    <img src="meonjijinyum.png" alt="로고" class="logo">
+    
+    <nav>
+      <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
+    </nav>
 
-  <div class="hero">
     <div class="content">
       <div class="headline delay-1">학원비를 환급 받는</div>
       <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
       <div class="headline delay-3">제시해 드립니다.</div>
-      <button class="button">시작하기</button>
+      <a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
+    </div>
+  </div>
+  
+  <!-- 모바일 버전 -->
+  <div class="mobile-version hero">
+    <div class="video-container">
+      <video class="background-video" autoplay muted loop playsinline>
+        <source src="seoulgangnamcity.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="overlay"></div>
+    </div>
+    
+    <img src="meonjijinyum.png" alt="로고" class="logo">
+    
+    <nav>
+      <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
+    </nav>
+
+    <div class="content">
+      <div class="headline delay-1">학원비를</div>
+      <div class="headline delay-1">환급 받는</div>
+      <div class="headline delay-2">가장 단순하고,</div>
+      <div class="headline delay-2">확실한 방법을</div>
+      <div class="headline delay-3">제시해 드립니다.</div>
+      <a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
     </div>
   </div>
 
@@ -165,6 +305,5 @@
   </div>
 </body>
 </html>
-
 
 

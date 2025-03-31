@@ -171,7 +171,7 @@
     .footer-logo:hover {
       opacity: 1;
     }
-    #purpose {
+    .purpose-text {
       font-size: 1.25rem;
       line-height: 2;
       opacity: 0;
@@ -221,7 +221,7 @@
         font-size: 0.9rem;
       }
       
-      #purpose {
+      .purpose-text {
         font-size: 1rem;
         line-height: 1.8;
       }
@@ -286,25 +286,26 @@
     });
 
     function toggleSection() {
-      const pcTextContainer = document.querySelector('.pc-version .text-container');
-      const mobileTextContainer = document.querySelector('.mobile-version .text-container');
-      const purposeText = document.getElementById('purpose');
-      const purposeButton = document.querySelectorAll('.purpose-button');
+      // 현재 활성화된 버전 확인 (PC 또는 모바일)
+      const isPcVisible = window.getComputedStyle(document.querySelector('.pc-version')).display !== 'none';
       
-      // PC 및 모바일 텍스트 컨테이너가 표시되어 있는지 확인
-      const isPcVisible = window.getComputedStyle(pcTextContainer).opacity !== '0';
-      const isMobileVisible = window.getComputedStyle(mobileTextContainer).opacity !== '0';
+      // 현재 활성화된 버전의 요소들 선택
+      const activeVersion = isPcVisible ? '.pc-version' : '.mobile-version';
+      const textContainer = document.querySelector(activeVersion + ' .text-container');
+      const purposeText = document.querySelector(activeVersion + ' .purpose-text');
+      const purposeButton = document.querySelector(activeVersion + ' .purpose-button');
       
-      if ((isPcVisible || isMobileVisible) && purposeText.style.opacity !== '1') {
+      // 현재 텍스트 컨테이너가 보이는지 확인
+      const isMainTextVisible = window.getComputedStyle(textContainer).opacity !== '0';
+      
+      if (isMainTextVisible) {
         // 기존 텍스트 숨기기
-        pcTextContainer.style.opacity = '0';
-        mobileTextContainer.style.opacity = '0';
+        textContainer.style.opacity = '0';
         
         // 애니메이션 완료 후 취지 텍스트 표시
         setTimeout(function() {
           // 기존 텍스트 컨테이너 숨기기
-          pcTextContainer.style.display = 'none';
-          mobileTextContainer.style.display = 'none';
+          textContainer.style.display = 'none';
           
           // 취지 텍스트 표시
           purposeText.style.display = 'block';
@@ -313,18 +314,18 @@
           setTimeout(function() {
             purposeText.style.opacity = '1';
             // 환급액 조회하기 버튼도 표시
-            purposeButton.forEach(function(button) {
-              button.style.opacity = '1';
-            });
+            if (purposeButton) {
+              purposeButton.style.opacity = '1';
+            }
           }, 50);
         }, 500);
       } else {
         // 취지 텍스트 숨기기
         purposeText.style.opacity = '0';
         // 환급액 조회하기 버튼도 숨기기
-        purposeButton.forEach(function(button) {
-          button.style.opacity = '0';
-        });
+        if (purposeButton) {
+          purposeButton.style.opacity = '0';
+        }
         
         // 애니메이션 완료 후 기존 텍스트 표시
         setTimeout(function() {
@@ -332,13 +333,11 @@
           purposeText.style.display = 'none';
           
           // 기존 텍스트 컨테이너 표시
-          pcTextContainer.style.display = 'block';
-          mobileTextContainer.style.display = 'block';
+          textContainer.style.display = 'block';
           
           // 기존 텍스트 페이드인
           setTimeout(function() {
-            pcTextContainer.style.opacity = '1';
-            mobileTextContainer.style.opacity = '1';
+            textContainer.style.opacity = '1';
           }, 50);
         }, 500);
       }
@@ -370,7 +369,7 @@
         <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button">시작하기</a>
       </div>
       
-      <div id="purpose" style="display: none; opacity: 0;">
+      <div class="purpose-text" style="display: none; opacity: 0;">
         <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
         <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
         이제 너무 진부해진 표현이 되어 버린 건가요?</p>
@@ -412,7 +411,7 @@
         <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button">시작하기</a>
       </div>
       
-      <div id="purpose" style="display: none; opacity: 0;">
+      <div class="purpose-text" style="display: none; opacity: 0;">
         <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
         <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
         이제 너무 진부해진 표현이 되어 버린 건가요?</p>

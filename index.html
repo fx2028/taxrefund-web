@@ -64,6 +64,16 @@
       z-index: 2;
       padding: 0 10%;
       width: 100%;
+      /* 여기서 위치 조정: 상단 여백 추가 */
+      margin-top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .text-container {
+      /* 텍스트 컨테이너 추가 */
+      margin-top: 0;
     }
     .headline {
       font-size: 4.5rem;
@@ -95,6 +105,7 @@
       animation-delay: 4.5s;
       text-decoration: none;
       display: inline-block;
+      margin-top: 1rem;
     }
     .button:hover {
       background-color: #eee;
@@ -120,24 +131,37 @@
       cursor: pointer;
       border-radius: 4px;
     }
-    .logo {
+    .main-logo {
       position: absolute;
       top: 20px;
       left: 20px;
-      width: 60px;
+      width: 80px;
       height: auto;
       z-index: 3;
+      transition: opacity 0.3s ease;
+    }
+    .main-logo:hover {
+      opacity: 0.9;
+    }
+    .footer-logo {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: auto;
+      z-index: 3;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+    }
+    .footer-logo:hover {
+      opacity: 1;
     }
     #purpose {
-      display: none;
-      background-color: #111;
-      padding: 60px 20px;
-      text-align: left;
       font-size: 1.25rem;
       line-height: 2;
-    }
-    #purpose.show {
-      display: block;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
     
     /* PC 스타일 - 기본 */
@@ -167,10 +191,15 @@
         font-size: 1rem;
       }
       
-      .logo {
-        width: 45px;
+      .main-logo {
+        width: 60px;
         top: 15px;
         left: 15px;
+      }
+      
+      .footer-logo {
+        width: 100px;
+        bottom: 15px;
       }
       
       .menu-button {
@@ -179,7 +208,6 @@
       }
       
       #purpose {
-        padding: 40px 15px;
         font-size: 1rem;
         line-height: 1.8;
       }
@@ -207,6 +235,14 @@
       
       .content {
         padding: 0 7%;
+      }
+      
+      .main-logo {
+        width: 50px;
+      }
+      
+      .footer-logo {
+        width: 80px;
       }
     }
   </style>
@@ -236,10 +272,52 @@
     });
 
     function toggleSection() {
-      const section = document.getElementById('purpose');
-      section.classList.toggle('show');
-      if (section.classList.contains('show')) {
-        section.scrollIntoView({ behavior: 'smooth' });
+      const pcTextContainer = document.querySelector('.pc-version .text-container');
+      const mobileTextContainer = document.querySelector('.mobile-version .text-container');
+      const purposeText = document.getElementById('purpose');
+      
+      // PC 및 모바일 텍스트 컨테이너가 표시되어 있는지 확인
+      const isPcVisible = window.getComputedStyle(pcTextContainer).opacity !== '0';
+      const isMobileVisible = window.getComputedStyle(mobileTextContainer).opacity !== '0';
+      
+      if ((isPcVisible || isMobileVisible) && purposeText.style.opacity !== '1') {
+        // 기존 텍스트 숨기기
+        pcTextContainer.style.opacity = '0';
+        mobileTextContainer.style.opacity = '0';
+        
+        // 애니메이션 완료 후 취지 텍스트 표시
+        setTimeout(function() {
+          // 기존 텍스트 컨테이너 숨기기
+          pcTextContainer.style.display = 'none';
+          mobileTextContainer.style.display = 'none';
+          
+          // 취지 텍스트 표시
+          purposeText.style.display = 'block';
+          
+          // 취지 텍스트 페이드인
+          setTimeout(function() {
+            purposeText.style.opacity = '1';
+          }, 50);
+        }, 500);
+      } else {
+        // 취지 텍스트 숨기기
+        purposeText.style.opacity = '0';
+        
+        // 애니메이션 완료 후 기존 텍스트 표시
+        setTimeout(function() {
+          // 취지 텍스트 숨기기
+          purposeText.style.display = 'none';
+          
+          // 기존 텍스트 컨테이너 표시
+          pcTextContainer.style.display = 'block';
+          mobileTextContainer.style.display = 'block';
+          
+          // 기존 텍스트 페이드인
+          setTimeout(function() {
+            pcTextContainer.style.opacity = '1';
+            mobileTextContainer.style.opacity = '1';
+          }, 50);
+        }, 500);
       }
     }
   </script>
@@ -255,17 +333,30 @@
       <div class="overlay"></div>
     </div>
     
-    <img src="meonjijinyum.png" alt="로고" class="logo">
+    <img src="Main logo.jpg" alt="메인 로고" class="main-logo">
+    <img src="meonjijinyum.jpg" alt="먼지진윰" class="footer-logo">
     
     <nav>
       <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
     </nav>
 
     <div class="content">
-      <div class="headline delay-1">학원비를 환급 받는</div>
-      <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
-      <div class="headline delay-3">제시해 드립니다.</div>
-      <a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
+      <div class="text-container" style="opacity: 1;">
+        <div class="headline delay-1">학원비를 환급 받는</div>
+        <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
+        <div class="headline delay-3">제시해 드립니다.</div>
+        <a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
+      </div>
+      
+      <div id="purpose" style="display: none; opacity: 0;">
+        <p><strong>전국의 초등학생 부모님!</strong></p>
+        <p>매 분기, 매 년 학원비는 오르는데, 월급만 안 오른다는 말은 이제 너무 진부해진 표현이 되어 버린 건가요?</p>
+        <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비, 서슬 퍼런 은행 대출 상환일 등등</p>
+        <p>오늘도 무사히 잘 넘기고 계신지요?</p>
+        <p>팍팍 살림살이지만 오늘도 고생 많으십니다.</p>
+        <p>학부모님들의 이런 가치와 노고를 잘 알기에 저희는 조금이나마 지불하신 학원비에 보탬이 되고자 최선을 다하겠습니다.</p>
+<a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
+      </div>
     </div>
   </div>
   
@@ -279,31 +370,31 @@
       <div class="overlay"></div>
     </div>
     
-    <img src="meonjijinyum.png" alt="로고" class="logo">
-    
-    <nav>
+    <img src="Main logo.jpg" alt="메인 로고" class="main-logo">
+       <nav>
       <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
     </nav>
 
     <div class="content">
-      <div class="headline delay-1">학원비를</div>
-      <div class="headline delay-1">환급 받는</div>
-      <div class="headline delay-2">가장 단순하고,</div>
-      <div class="headline delay-2">확실한 방법을</div>
-      <div class="headline delay-3">제시해 드립니다.</div>
-      <a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
+      <div class="text-container" style="opacity: 1;">
+        <div class="headline delay-1">학원비를</div>
+        <div class="headline delay-1">환급 받는</div>
+        <div class="headline delay-2">가장 단순하고,</div>
+        <div class="headline delay-2">확실한 방법을</div>
+        <div class="headline delay-3">제시해 드립니다.</div>
+        <a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
+      </div>
+      
+      <div id="purpose" style="display: none; opacity: 0;">
+        <p><strong>전국의 초등학생 부모님!</strong></p>
+        <p>매 분기, 매 년 학원비는 오르는데, 월급만 안 오른다는 말은 이제 너무 진부해진 표현이 되어 버린 건가요?</p>
+        <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비, 서슬 퍼런 은행 대출 상환일 등등</p>
+        <p>오늘도 무사히 잘 넘기고 계신지요?</p>
+        <p>팍팍 살림살이지만 오늘도 고생 많으십니다.</p>
+        <p>학부모님들의 이런 가치와 노고를 잘 알기에 저희는 조금이나마 지불하신 학원비에 보탬이 되고자 최선을 다하겠습니다.</p>
+<a href="https://open.kakao.com/o/s8cCMIkh" target="_blank" class="button">시작하기</a>
+      </div>
     </div>
-  </div>
-
-  <div id="purpose">
-    <p><strong>전국의 초등학생 부모님!</strong></p>
-    <p>매 분기, 매 년 학원비는 오르는데, 월급만 안 오른다는 말은 이제 너무 진부해진 표현이 되어 버린 건가요?</p>
-    <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비, 서슬 퍼런 은행 대출 상환일 등등</p>
-    <p>오늘도 무사히 잘 넘기고 계신지요?</p>
-    <p>팍팍 살림살이지만 오늘도 고생 많으십니다.</p>
-    <p>학부모님들의 이런 가치와 노고를 잘 알기에 저희는 조금이나마 지불하신 학원비에 보탬이 되고자 최선을 다하겠습니다.</p>
   </div>
 </body>
 </html>
-
-

@@ -1,3 +1,23 @@
+<!DOCTYPE html> <html lang="ko"> <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5L7LEL42D"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gt
+
+pasted
+
+main logo 크기 2배로 키워줘
+
+I'll modify the HTML code to make the main logo twice its current size. Here's the updated code with the changes:
+
+
+Updated HTML with Larger Main Logo
+코드 
+
+main logo 크기 2배로 키워줘
+
+
+
+<!DOCTYPE html> <html lang="ko"> <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5L7LEL42D"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gt
+
+pasted
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -159,7 +179,7 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      width: 80px;
+      width: 160px; /* 원래 80px에서 2배로 증가 */
       height: auto;
       z-index: 3;
       transition: opacity 0.3s ease;
@@ -170,7 +190,7 @@
     .taxrefund-logo {
       position: absolute;
       bottom: 20px;
-      right: 20px;
+      right: 42px;
       width: 120px;
       height: auto;
       z-index: 3;
@@ -231,7 +251,7 @@
       }
       
       .main-logo {
-        width: 60px;
+        width: 120px; /* 원래 60px에서 2배로 증가 */
         top: 15px;
         left: 15px;
       }
@@ -283,7 +303,7 @@
       }
       
       .main-logo {
-        width: 50px;
+        width: 100px; /* 원래 50px에서 2배로 증가 */
       }
       
       .taxrefund-logo {
@@ -320,7 +340,7 @@
       // 자동으로 기기 감지하여 클래스 추가
       document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');
       
-      // Main logo2와 "학" 자가 일직선이 되도록 조정
+      // Main logo와 "학" 자가 일직선이 되도록 조정
       const mainLogo = document.querySelector('.main-logo');
       const headline = document.querySelector('.headline.delay-1');
       
@@ -406,7 +426,7 @@
       <div class="overlay"></div>
     </div>
     
-    <img src="Main logo.jpg" alt="메인 로고" class="main-logo">
+    <img src="Main logo.png" alt="메인 로고" class="main-logo">
     <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
     <nav>
@@ -449,7 +469,7 @@
       <div class="overlay"></div>
     </div>
     
-    <img src="Main logo2.jpg" alt="메인 로고" class="main-logo">
+    <img src="Main logo.png" alt="메인 로고" class="main-logo">
     <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
     <nav>

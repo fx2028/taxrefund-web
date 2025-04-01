@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -166,18 +167,17 @@
     .main-logo:hover {
       opacity: 0.9;
     }
-    .footer-logo {
+    .taxrefund-logo {
       position: absolute;
       bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 140px;
+      right: 20px;
+      width: 120px;
       height: auto;
       z-index: 3;
       opacity: 0.8;
       transition: opacity 0.3s ease;
     }
-    .footer-logo:hover {
+    .taxrefund-logo:hover {
       opacity: 1;
     }
     .purpose-text {
@@ -185,6 +185,22 @@
       line-height: 2;
       opacity: 0;
       transition: opacity 0.5s ease;
+    }
+    
+    .copyright {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      opacity: 0.6;
+      z-index: 3;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      transition: opacity 0.3s ease;
+    }
+    .copyright:hover {
+      opacity: 0.9;
     }
     
     /* PC 스타일 - 기본 */
@@ -220,8 +236,14 @@
         left: 15px;
       }
       
-      .footer-logo {
-        width: 100px;
+      .taxrefund-logo {
+        width: 80px;
+        bottom: 50px;
+        right: 15px;
+      }
+      
+      .copyright {
+        font-size: 0.7rem;
         bottom: 15px;
       }
       
@@ -264,8 +286,13 @@
         width: 50px;
       }
       
-      .footer-logo {
-        width: 80px;
+      .taxrefund-logo {
+        width: 70px;
+        bottom: 50px;
+      }
+      
+      .copyright {
+        font-size: 0.6rem;
       }
     }
   </style>
@@ -292,6 +319,21 @@
       
       // 자동으로 기기 감지하여 클래스 추가
       document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');
+      
+      // Main logo와 "학" 자가 일직선이 되도록 조정
+      const mainLogo = document.querySelector('.main-logo');
+      const headline = document.querySelector('.headline.delay-1');
+      
+      // DOM이 완전히 로드된 후에 위치 조정
+      setTimeout(function() {
+        const headlineRect = headline.getBoundingClientRect();
+        const logoRect = mainLogo.getBoundingClientRect();
+        
+        // PC 버전에서만 조정
+        if(window.innerWidth > 768) {
+          mainLogo.style.left = headlineRect.left + 'px';
+        }
+      }, 100);
     });
 
     function toggleSection() {
@@ -365,6 +407,7 @@
     </div>
     
     <img src="Main logo.jpg" alt="메인 로고" class="main-logo">
+    <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
     <nav>
       <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
@@ -392,6 +435,8 @@
         <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="purpose-button">환급액 조회하기</a>
       </div>
     </div>
+    
+    <div class="copyright">2025 © 환급정산 All rights reserved</div>
   </div>
   
   <!-- 모바일 버전 -->
@@ -405,6 +450,7 @@
     </div>
     
     <img src="Main logo.jpg" alt="메인 로고" class="main-logo">
+    <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
     <nav>
       <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
@@ -434,6 +480,8 @@
         <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="purpose-button">환급액 조회하기</a>
       </div>
     </div>
+    
+    <div class="copyright">2025 © 환급정산 All rights reserved</div>
   </div>
 </body>
 </html>

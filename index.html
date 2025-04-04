@@ -1,24 +1,3 @@
-<!DOCTYPE html> <html lang="ko"> <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5L7LEL42D"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gt
-
-pasted
-
-main logo 크기 2배로 키워줘
-
-I'll modify the HTML code to make the main logo twice its current size. Here's the updated code with the changes:
-
-
-Updated HTML with Larger Main Logo
-코드 
-
-main logo 크기 2배로 키워줘
-
-
-
-<!DOCTYPE html> <html lang="ko"> <head> <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5L7LEL42D"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gt
-
-pasted
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,6 +9,12 @@ pasted
   gtag('js', new Date());
 
   gtag('config', 'G-V5L7LEL42D');
+</script>
+<!-- Google tag (gtag.js) event -->
+<script>
+  gtag('event', 'conversion_event_outbound_click', {
+    // <event_parameters>
+  });
 </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -191,7 +176,7 @@ pasted
       position: absolute;
       bottom: 18px;
       right: 42px;
-      width: 120px;
+      width: 66px; /* 120px의 55%로 축소 */
       height: auto;
       z-index: 3;
       opacity: 0.8;
@@ -221,6 +206,24 @@ pasted
     }
     .copyright:hover {
       opacity: 0.9;
+    }
+    
+    /* 연락처 정보 스타일 */
+    .contact-info {
+      position: absolute;
+      bottom: 55px;
+      right: 42px;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      z-index: 3;
+      text-align: right;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      transition: opacity 0.3s ease;
+    }
+    .contact-info:hover {
+      opacity: 1;
     }
     
     /* PC 스타일 - 기본 */
@@ -256,11 +259,12 @@ pasted
         left: 15px;
       }
       
-      .taxrefund-logo {
-        width: 80px;
-        bottom: 50px;
-        right: 15px;
-      }
+@media (max-width: 768px) {
+  .taxrefund-logo {
+    width: 44px; /* 원래 80px의 55% */
+    bottom: 50px;
+    right: 15px;
+  }
       
       .copyright {
         font-size: 0.7rem;
@@ -275,6 +279,12 @@ pasted
       .purpose-text {
         font-size: 1rem;
         line-height: 1.8;
+      }
+      
+      .contact-info {
+        bottom: 85px;
+        right: 15px;
+        font-size: 0.7rem;
       }
       
       /* 모바일에서는 헤드라인 간격 조정 */
@@ -306,12 +316,17 @@ pasted
         width: 100px; /* 원래 50px에서 2배로 증가 */
       }
       
-      .taxrefund-logo {
-        width: 70px;
-        bottom: 50px;
-      }
+@media (max-width: 480px) {
+  .taxrefund-logo {
+    width: 38.5px; /* 원래 70px의 55% */
+  }
+}
       
       .copyright {
+        font-size: 0.6rem;
+      }
+      
+      .contact-info {
         font-size: 0.6rem;
       }
     }
@@ -456,6 +471,7 @@ pasted
       </div>
     </div>
     
+    <div class="contact-info">서울특별시 테헤란로103길 6 한진빌딩<br>+82 70-4837-2782</div>
     <div class="copyright">2025 © 환급정산 All rights reserved</div>
   </div>
   
@@ -501,6 +517,7 @@ pasted
       </div>
     </div>
     
+    <div class="contact-info">서울특별시 테헤란로103길 6 한진빌딩<br>+82 70-4837-2782</div>
     <div class="copyright">2025 © 환급정산 All rights reserved</div>
   </div>
 </body>

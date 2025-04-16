@@ -372,7 +372,7 @@
   </div>
 
 <script>
-    // 페이지 로드 시 즉시 실행
+ // 페이지 로드 시 즉시 실행
     document.addEventListener('DOMContentLoaded', function() {
       // 초기 상태 명확하게 설정
       const mainContent = document.getElementById('main-content');
@@ -384,42 +384,58 @@
       purposeContent.style.display = 'none';
       purposeContent.style.opacity = '0';
       
-      // 버튼 클릭 이벤트 설정
-      document.getElementById('purpose-btn').addEventListener('click', function() {
-        mainContent.style.opacity = '0';
-        setTimeout(function() {
-          mainContent.style.display = 'none';
-          purposeContent.style.display = 'block';
-          setTimeout(function() {
-            purposeContent.style.opacity = '1';
-          }, 10);
-        }, 500);
-      });
+      // 버튼 요소 가져오기
+      const purposeBtn = document.getElementById('purpose-btn');
+      const backBtn = document.getElementById('back-btn');
       
-      document.getElementById('back-btn').addEventListener('click', function() {
-        purposeContent.style.opacity = '0';
-        setTimeout(function() {
-          purposeContent.style.display = 'none';
-          mainContent.style.display = 'block';
+      // 환급취지 버튼 클릭 이벤트
+      if (purposeBtn) {
+        purposeBtn.addEventListener('click', function() {
+          console.log("Purpose button clicked");
+          mainContent.style.opacity = '0';
           setTimeout(function() {
-            mainContent.style.opacity = '1';
-          }, 10);
-        }, 500);
-      });
+            mainContent.style.display = 'none';
+            purposeContent.style.display = 'block';
+            setTimeout(function() {
+              purposeContent.style.opacity = '1';
+            }, 10);
+          }, 500);
+        });
+      } else {
+        console.error("환급취지 버튼을 찾을 수 없습니다");
+      }
+      
+      // 돌아가기 버튼 클릭 이벤트
+      if (backBtn) {
+        backBtn.addEventListener('click', function() {
+          console.log("Back button clicked");
+          purposeContent.style.opacity = '0';
+          setTimeout(function() {
+            purposeContent.style.display = 'none';
+            mainContent.style.display = 'block';
+            setTimeout(function() {
+              mainContent.style.opacity = '1';
+            }, 10);
+          }, 500);
+        });
+      } else {
+        console.error("돌아가기 버튼을 찾을 수 없습니다");
+      }
       
       // 비디오 로드 시도
       const video = document.querySelector('.background-video');
-      
-      // 비디오 로드 실패 시 처리
-      video.addEventListener('error', function() {
-        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-      });
-      
-      // iOS Safari 등에서 자동 재생이 실패할 경우
-      video.play().catch(function(error) {
-        console.log("Video play failed:", error);
-        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-      });
+      if (video) {
+        // 비디오 로드 실패 시 처리
+        video.addEventListener('error', function() {
+          document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        });
+        
+        // iOS Safari 등에서 자동 재생이 실패할 경우
+        video.play().catch(function(error) {
+          console.log("Video play failed:", error);
+          document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        });
+      }
     });
 
     // toggleSection 함수를 script 태그 안으로 이동

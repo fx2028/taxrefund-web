@@ -34,6 +34,10 @@
       height: 100%;
       overflow-x: hidden;
     }
+  /* 여기에 .hidden 클래스 추가 */
+  .hidden {
+    display: none !important;
+  }
     .hero {
       position: relative;
       height: 100vh;
@@ -328,6 +332,20 @@
         font-size: 0.6rem;
       }
     }
+/* 기존 스타일 유지하고 아래 추가 */
+    #mainContent, #purposeContent {
+      transition: opacity 0.3s ease;
+    }
+    
+    #mainContent.inactive, #purposeContent.inactive {
+      display: none;
+      opacity: 0;
+    }
+    
+    #mainContent.active, #purposeContent.active {
+      display: block;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -344,50 +362,49 @@
     <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
     <nav>
-      <button id="menuButton" class="menu-button">프로젝트의 취지</button>
+      <button id="menuButton" class="menu-button" onclick="toggleView()">프로젝트의 취지</button>
     </nav>
 
-    <div class="content">
-      <div id="mainContent" class="text-container">
-        <div class="headline delay-1">자녀 학원비를 환급 받는</div>
-        <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
-        <div class="headline delay-3">제시해 드립니다.</div>
-        <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button"
-   onclick="gtag('event', 'conversion_event_outbound_click', {event_category: 'outbound', event_label: '시작하기 버튼'})">
-  시작하기
-</a>
-<div class="subtext">환급안되면 100% 환불</div>
-
-<!-- ✅ 자연스럽게 노출되는 절차 안내 -->
-<div class="refund-inline-guide" style="font-size: 0.85rem; color: #ccc; margin-top: 1rem; line-height: 1.6;">
-  <p style="margin: 0.5rem 0;"><strong>💸 환급정산 환급금 수령 절차</strong></p>
-  <ol style="margin: 0; padding-left: 1.2rem;">
-    <li>본인확인/회원가입 없이 <strong>시작하기</strong> 버튼</li>
-    <li>환급금 <strong>최대금액 무료조회</strong></li>
-    <li><strong>환급금 신청하기</strong> 클릭</li>
-    <li><strong>수수료 결제 후</strong> 환급금 입금액 확인하기</li>
-  </ol>
+<div class="content">
+  <div id="mainContent" class="text-container active">
+    <!-- 여기에 메인 콘텐츠 내용이 들어갑니다 -->
+    <div class="headline delay-1">자녀 학원비를 환급 받는</div>
+    <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
+    <div class="headline delay-3">제시해 드립니다.</div>
+    <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button" onclick="gtag('event', 'conversion_event_outbound_click', {event_category: 'outbound', event_label: '시작하기 버튼'})">
+      시작하기
+    </a>
+    <div class="subtext">환급안되면 100% 환불</div>
+    
+    <!-- 환급 절차 안내 -->
+    <div class="refund-inline-guide" style="font-size: 0.85rem; color: #ccc; margin-top: 1rem; line-height: 1.6;">
+      <p style="margin: 0.5rem 0;"><strong>💸 환급정산 환급금 수령 절차</strong></p>
+      <ol style="margin: 0; padding-left: 1.2rem;">
+        <li>본인확인/회원가입 없이 <strong>시작하기</strong> 버튼</li>
+        <li>환급금 <strong>최대금액 무료조회</strong></li>
+        <li><strong>환급금 신청하기</strong> 클릭</li>
+        <li><strong>수수료 결제 후</strong> 환급금 입금액 확인하기</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div id="purposeContent" class="purpose-text inactive">
+    <!-- 여기에 프로젝트 취지 내용이 들어갑니다 -->
+    <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
+    <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
+    이제 너무 진부해진 표현이 되어 버린 건가요?</p>
+    <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비,<br>
+    서슬 퍼런 은행 대출이자 상환일 등등<br>
+    오늘도 무사히 잘 넘기고 계신지요?</p>
+    <p>아이 교육만큼은 놓지 않으시려는 부모님의 마음, 저희는 잘 알고 있습니다.</p>
+    <p>지불하신 학원비, 조금이라도 돌려받을 수 있도록.<br>
+    복잡한 과정은 저희가 줄이고, 부모님께 도움이 되는 방법만 담았습니다.</p>
+    <p>학부모님의 소중한 가정경제에 도움이 되고자 진심을 다해 돕겠습니다.</p>
+    <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="purpose-button" onclick="gtag('event', 'conversion_event_outbound_click', {event_category: 'outbound', event_label: '시작하기 버튼'})">
+      환급액 조회하기
+    </a>
+  </div>
 </div>
-      <div id="purposeContent" class="purpose-text hidden">
-        <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
-        <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
-        이제 너무 진부해진 표현이 되어 버린 건가요?</p>
-        <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비,<br>
-        서슬 퍼런 은행 대출이자 상환일 등등<br>
-        오늘도 무사히 잘 넘기고 계신지요?</p>
-        <p>아이 교육만큼은 놓지 않으시려는 부모님의 마음, 저희는 잘 알고 있습니다.</p>
-        <p>지불하신 학원비, 조금이라도 돌려받을 수 있도록.<br>
-        복잡한 과정은 저희가 줄이고, 부모님께 도움이 되는 방법만 담았습니다.</p>
-        <p>학부모님의 소중한 가정경제에 도움이 되고자 진심을 다해 돕겠습니다.</p>
-<a
-  href="https://oos-refund-project-3a158.web.app"
-  target="_blank"
-  class="purpose-button"
-  onclick="gtag('event', 'conversion_event_outbound_click', {event_category: 'outbound', event_label: '시작하기 버튼'})"
->
-  환급액 조회하기
-</a>
-      </div>
 
     </div>
     <div class="contact-info">업종: 경영컨설팅/세무자문업<br>부국강병2100 / 163-26-02070<br>인천 남동구 논고개로123번길 45, 4층<br>CONTACT US  YOUNG WAN KIM <br>+82 70-4837-2782</div>
@@ -395,114 +412,49 @@
   </div>
 
 <script>
-  // 모든 이벤트 핸들러 통합 - 한 곳에서만 관리
-  function initApp() {
-    console.log('앱 초기화 시작');
-    
-    // 필요한 요소 가져오기
-    const menuButton = document.getElementById('menuButton');
-    const mainContent = document.getElementById('mainContent');
-    const purposeContent = document.getElementById('purposeContent');
-    
-    // 혹시 모를 이전 이벤트 제거 (이벤트 중복 방지)
-    const newMenuButton = menuButton.cloneNode(true);
-    menuButton.parentNode.replaceChild(newMenuButton, menuButton);
-    
-  // 앱 상태를 전역 객체로 관리
-  window.appState = {
-    showingMainContent: true,
-    appInitialized: false
-  };
-
-  // 모든 이벤트 핸들러 통합
-  function initApp() {
-    // 이미 초기화되었으면 중복 실행 방지
-    if(window.appState.appInitialized) {
-      return;
-    }
-    
-    console.log('앱 초기화 시작');
-    
-    // 필요한 요소 가져오기
-    const menuButton = document.getElementById('menuButton');
-    const mainContent = document.getElementById('mainContent');
-    const purposeContent = document.getElementById('purposeContent');
-    
-    if(!menuButton || !mainContent || !purposeContent) {
-      console.error('필요한 요소를 찾을 수 없습니다');
-      return;
-    }
-    
-    // 메뉴 토글 핸들러 함수
-    function handleMenuToggle(e) {
-      // 기본 이벤트 동작 방지
-      e.preventDefault();
+    // 가장 단순한 형태의 토글 함수
+    function toggleView() {
+      var main = document.getElementById('mainContent');
+      var purpose = document.getElementById('purposeContent');
+      var button = document.getElementById('menuButton');
       
-      console.log('메뉴 토글 클릭됨');
+      // 현재 상태 확인
+      var isMainActive = main.classList.contains('active');
       
-      if (window.appState.showingMainContent) {
-        // 메인 콘텐츠 숨기기
-        mainContent.classList.add('hidden');
-        // 취지 콘텐츠 표시
-        purposeContent.classList.remove('hidden');
-        // 버튼 텍스트 변경
-        menuButton.textContent = '메인으로 돌아가기';
+      if (isMainActive) {
+        // 메인 -> 취지로 전환
+        main.classList.remove('active');
+        main.classList.add('inactive');
+        
+        purpose.classList.remove('inactive');
+        purpose.classList.add('active');
+        
+        button.textContent = '메인으로 돌아가기';
       } else {
-        // 취지 콘텐츠 숨기기
-        purposeContent.classList.add('hidden');
-        // 메인 콘텐츠 표시
-        mainContent.classList.remove('hidden');
-        // 버튼 텍스트 변경
-        menuButton.textContent = '프로젝트의 취지';
+        // 취지 -> 메인으로 전환
+        purpose.classList.remove('active');
+        purpose.classList.add('inactive');
+        
+        main.classList.remove('inactive');
+        main.classList.add('active');
+        
+        button.textContent = '프로젝트의 취지';
       }
-      
-      // 상태 업데이트
-      window.appState.showingMainContent = !window.appState.showingMainContent;
-      console.log('메뉴 토글 완료: 메인 콘텐츠 표시 =', window.appState.showingMainContent);
-    }
-    
-    // 이벤트 리스너 직접 추가 (클론 없이)
-    menuButton.addEventListener('click', handleMenuToggle);
-    
-    // 모바일 터치 지원
-    menuButton.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      handleMenuToggle(e);
-    });
-    
-    // 비디오 처리
-    const video = document.querySelector('.background-video');
-    if (video) {
-      video.addEventListener('error', function() {
-        console.log('비디오 로드 실패');
-        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-      });
-      
-      video.play().catch(function(error) {
-        console.log('비디오 자동 재생 실패:', error);
-        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-      });
     }
     
     // 페이지 로드 시 초기 상태 설정
-    mainContent.classList.remove('hidden');
-    purposeContent.classList.add('hidden');
-    menuButton.textContent = '프로젝트의 취지';
-    
-    // 초기화 완료 표시
-    window.appState.appInitialized = true;
-    console.log('앱 초기화 완료');
-  }
-
-  // DOMContentLoaded 이벤트로 초기화
-  document.addEventListener('DOMContentLoaded', initApp);
-  
-  // 백업: window.onload에서도 초기화
-  window.addEventListener('load', function() {
-    if (!window.appState.appInitialized) {
-      console.log('window.onload에서 앱 초기화');
-      initApp();
-    }
-  });
-</script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var main = document.getElementById('mainContent');
+      var purpose = document.getElementById('purposeContent');
+      
+      if (main && purpose) {
+        main.classList.add('active');
+        main.classList.remove('inactive');
+        
+        purpose.classList.add('inactive');
+        purpose.classList.remove('active');
+      }
+    });
+  </script>
+</body>
 </html>

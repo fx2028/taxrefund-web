@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V5L7LEL42D"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V5L7LEL42D');
-</script>
-<!-- Google tag (gtag.js) event -->
-<script>
-  gtag('event', 'conversion_event_outbound_click', {
-    // <event_parameters>
-  });
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5L7LEL42D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5L7LEL42D');
+  </script>
+  <!-- Google tag (gtag.js) event -->
+  <script>
+    gtag('event', 'conversion_event_outbound_click', {
+      // <event_parameters>
+    });
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>학원비 환급정산</title>
@@ -71,7 +70,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.7); /* 더 어둡게 조정 */
       z-index: 1;
     }
     .content {
@@ -79,7 +78,6 @@
       z-index: 2;
       padding: 0 10%;
       width: 100%;
-      /* 여기서 위치 조정: 상단 여백 추가 */
       margin-top: 0;
       display: flex;
       flex-direction: column;
@@ -87,7 +85,6 @@
       min-height: 100vh;
     }
     .text-container {
-      /* 텍스트 컨테이너 추가 */
       margin-top: 0;
     }
     .headline {
@@ -122,16 +119,14 @@
       display: inline-block;
       margin-top: 1rem;
     }
-
-/* ✅ 여기에 subtext 스타일 추가 */
-.subtext {
-  font-size: 0.8rem;
-  color: #ccc;
-  margin-top: 0.3rem;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-  animation-delay: 5.2s;
-}
+    .subtext {
+      font-size: 0.8rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 5.2s;
+    }
     .purpose-button {
       background-color: white;
       color: black;
@@ -174,7 +169,7 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      width: 160px; /* 원래 80px에서 2배로 증가 */
+      width: 160px;
       height: auto;
       z-index: 3;
       transition: opacity 0.3s ease;
@@ -186,7 +181,7 @@
       position: absolute;
       bottom: 18px;
       right: 42px;
-      width: 66px; /* 120px의 55%로 축소 */
+      width: 66px;
       height: auto;
       z-index: 3;
       opacity: 0.8;
@@ -218,7 +213,6 @@
       opacity: 0.9;
     }
     
-    /* 연락처 정보 스타일 */
     .contact-info {
       position: absolute;
       bottom: 55px;
@@ -236,23 +230,8 @@
       opacity: 1;
     }
     
-    /* PC 스타일 - 기본 */
-    .pc-version {
-      display: block;
-    }
-    .mobile-version {
-      display: none;
-    }
-    
     /* 모바일 스타일 */
     @media (max-width: 768px) {
-      .pc-version {
-        display: none;
-      }
-      .mobile-version {
-        display: block;
-      }
-      
       .headline {
         font-size: 2.2rem;
         margin-bottom: 1rem;
@@ -264,17 +243,17 @@
       }
       
       .main-logo {
-        width: 120px; /* 원래 60px에서 2배로 증가 */
+        width: 120px;
         top: 15px;
         left: 15px;
       }
       
-@media (max-width: 768px) {
-  .taxrefund-logo {
-    width: 44px; 
-    bottom: 50px;
-    right: 15px;
-  }
+      .taxrefund-logo {
+        width: 44px; 
+        bottom: 50px;
+        right: 15px;
+      }
+      
       .copyright {
         font-size: 0.7rem;
         bottom: 15px;
@@ -309,27 +288,32 @@
       .button {
         animation-delay: 3s;
       }
+      
+      /* 모바일에서 콘텐츠가 항상 보이도록 강제 설정 */
+      .content {
+        z-index: 10 !important;
+      }
+      .text-container {
+        opacity: 1 !important;
+      }
+      .overlay {
+        background-color: rgba(0, 0, 0, 0.8) !important; /* 더 어둡게 */
+      }
     }
     
     /* 작은 모바일 화면 추가 최적화 */
-@media (max-width: 480px) {
-  .taxrefund-logo {
-    width: 38.5px;
-  }
-      
+    @media (max-width: 480px) {
       .content {
         padding: 0 7%;
       }
       
       .main-logo {
-        width: 100px; /* 원래 50px에서 2배로 증가 */
+        width: 100px;
       }
       
-@media (max-width: 480px) {
-  .taxrefund-logo {
-    width: 38.5px; /* 원래 70px의 55% */
-  }
-}
+      .taxrefund-logo {
+        width: 38.5px;
+      }
       
       .copyright {
         font-size: 0.6rem;
@@ -339,254 +323,106 @@
         font-size: 0.6rem;
       }
     }
-/* 모바일에서 콘텐츠가 항상 보이도록 설정 */
-@media (max-width: 768px) {
-  .content {
-    z-index: 10 !important;
-  }
-  .text-container {
-    opacity: 1 !important;
-  }
-  .overlay {
-    background-color: rgba(0, 0, 0, 0.75); /* 어두운 배경으로 콘텐츠가 잘 보이게 함 */
-  }
-}
   </style>
-  <script>
-// 기기 타입 감지
-function detectDeviceType() {
-  // 화면 크기로도 판단
-  if (window.innerWidth <= 768) return 'mobile';
-  
-  // 기존 UserAgent 감지도 유지
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  if (/android|iPad|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
-    return 'mobile';
-  }
-  return 'desktop';
-}
+</head>
+<body>
+  <div class="hero" id="desktop">
+    <div class="video-container">
+      <video class="background-video" autoplay muted loop playsinline>
+        <source src="seoulgangnamcity.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="overlay"></div>
+    </div>
     
-// 페이지 로드 시 바로 콘텐츠 표시
-window.addEventListener('DOMContentLoaded', function() {
-  const deviceType = detectDeviceType();
-  console.log("Detected device type:", deviceType); // 디버깅용
-  
-  // 명확하게 display 속성 설정
-  if(deviceType === 'mobile') {
-    document.querySelector('.pc-version').style.display = 'none';
-    document.querySelector('.mobile-version').style.display = 'block';
-    console.log("Mobile version activated");
-  } else {
-    document.querySelector('.pc-version').style.display = 'block';
-    document.querySelector('.mobile-version').style.display = 'none';
-    console.log("PC version activated");
-  }
-  
-  // 모든 콘텐츠가 항상 보이도록 설정
-  document.querySelectorAll('.content').forEach(function(content) {
-    content.style.zIndex = '10';
-  });
-  
-  document.querySelectorAll('.text-container').forEach(function(container) {
-    container.style.opacity = '1';
-  });
-  
-  // 비디오 로드 및 재생 
-  const videos = document.querySelectorAll('.background-video');
-  videos.forEach(function(video) {
-    video.play().catch(function(error) {
-      console.log("Video play failed:", error);
-      // 오류 시 더 진한 오버레이 적용
-      document.querySelectorAll('.overlay').forEach(function(overlay) {
-        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
+    <img src="Main logo.png" alt="메인 로고" class="main-logo">
+    <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
+    
+    <nav>
+      <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
+    </nav>
+
+    <div class="content">
+      <div class="text-container" id="main-content">
+        <div class="headline delay-1">자녀 학원비를 환급 받는</div>
+        <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
+        <div class="headline delay-3">제시해 드립니다.</div>
+        <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button">시작하기</a>
+        <div class="subtext">본인확인 없이 환급금 무료 조회</div>
+        <div class="subtext">환급안되면 100% 환불</div>
+      </div>
+
+      <div class="purpose-text" id="purpose-content" style="display: none; opacity: 0;">
+        <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
+        <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
+        이제 너무 진부해진 표현이 되어 버린 건가요?</p>
+        <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비,<br>
+        서슬 퍼런 은행 대출이자 상환일 등등<br>
+        오늘도 무사히 잘 넘기고 계신지요?</p>
+        <p>아이 교육만큼은 놓지 않으시려는 부모님의 마음, 저희는 잘 알고 있습니다.</p>
+        <p>지불하신 학원비, 조금이라도 돌려받을 수 있도록.<br>
+        복잡한 과정은 저희가 줄이고, 부모님께 도움이 되는 방법만 담았습니다.</p>
+        <p>학부모님의 소중한 가정경제에 도움이 되고자 진심을 다해 돕겠습니다.</p>
+        <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="purpose-button">환급액 조회하기</a>
+      </div>
+    </div>
+    
+    <div class="contact-info">부국강병2100 / 163-26-02070<br>인천 남동구 논고개로123번길 45, 4층<br>CONTACT US  YOUNG WAN KIM <br>+82 70-4837-2782</div>
+    <div class="copyright">2025 © 학원비환급정산 All rights reserved</div>
+  </div>
+
+  <script>
+    // 페이지 로드 시 즉시 실행
+    document.addEventListener('DOMContentLoaded', function() {
+      // 텍스트 컨테이너를 먼저 표시
+      document.getElementById('main-content').style.opacity = '1';
+      
+      // 비디오 로드 시도
+      const video = document.querySelector('.background-video');
+      
+      // 비디오 로드 실패 시 처리
+      video.addEventListener('error', function() {
+        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+      });
+      
+      // iOS Safari 등에서 자동 재생이 실패할 경우
+      video.play().catch(function(error) {
+        console.log("Video play failed:", error);
+        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
       });
     });
-  });
-  
-
-  
-  // 자동으로 기기 감지하여 클래스 추가
-  document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');
-  
-  // Main logo와 "학" 자가 일직선이 되도록 조정
-  const mainLogo = document.querySelector('.main-logo');
-  const headline = document.querySelector('.headline.delay-1');
-  
-  // DOM이 완전히 로드된 후에 위치 조정
-  setTimeout(function() {
-    const headlineRect = headline.getBoundingClientRect();
-    const logoRect = mainLogo.getBoundingClientRect();
-    
-    // PC 버전에서만 조정
-    if(window.innerWidth > 768) {
-      mainLogo.style.left = headlineRect.left + 'px';
-    }
-  }, 100);
-});
 
     function toggleSection() {
-      // 현재 활성화된 버전 확인 (PC 또는 모바일)
-      const isPcVisible = window.getComputedStyle(document.querySelector('.pc-version')).display !== 'none';
+      const mainContent = document.getElementById('main-content');
+      const purposeContent = document.getElementById('purpose-content');
       
-      // 현재 활성화된 버전의 요소들 선택
-      const activeVersion = isPcVisible ? '.pc-version' : '.mobile-version';
-      const textContainer = document.querySelector(activeVersion + ' .text-container');
-      const purposeText = document.querySelector(activeVersion + ' .purpose-text');
-      const purposeButton = document.querySelector(activeVersion + ' .purpose-button');
-      
-      // 현재 텍스트 컨테이너가 보이는지 확인
-      const isMainTextVisible = window.getComputedStyle(textContainer).opacity !== '0';
-      
-      if (isMainTextVisible) {
-        // 기존 텍스트 숨기기
-        textContainer.style.opacity = '0';
+      // 메인 컨텐츠가 현재 보이는 경우
+      if (window.getComputedStyle(mainContent).opacity !== '0') {
+        // 메인 컨텐츠 숨기기
+        mainContent.style.opacity = '0';
         
-        // 애니메이션 완료 후 취지 텍스트 표시
         setTimeout(function() {
-          // 기존 텍스트 컨테이너 숨기기
-          textContainer.style.display = 'none';
+          mainContent.style.display = 'none';
+          purposeContent.style.display = 'block';
           
-          // 취지 텍스트 표시
-          purposeText.style.display = 'block';
-          
-          // 취지 텍스트 페이드인
           setTimeout(function() {
-            purposeText.style.opacity = '1';
-            // 환급액 조회하기 버튼도 표시
-            if (purposeButton) {
-              purposeButton.style.opacity = '1';
-            }
+            purposeContent.style.opacity = '1';
           }, 50);
         }, 500);
       } else {
-        // 취지 텍스트 숨기기
-        purposeText.style.opacity = '0';
-        // 환급액 조회하기 버튼도 숨기기
-        if (purposeButton) {
-          purposeButton.style.opacity = '0';
-        }
+        // 취지 컨텐츠 숨기기
+        purposeContent.style.opacity = '0';
         
-        // 애니메이션 완료 후 기존 텍스트 표시
         setTimeout(function() {
-          // 취지 텍스트 숨기기
-          purposeText.style.display = 'none';
+          purposeContent.style.display = 'none';
+          mainContent.style.display = 'block';
           
-          // 기존 텍스트 컨테이너 표시
-          textContainer.style.display = 'block';
-          
-          // 기존 텍스트 페이드인
           setTimeout(function() {
-            textContainer.style.opacity = '1';
+            mainContent.style.opacity = '1';
           }, 50);
         }, 500);
       }
     }
   </script>
-</head>
-<body>
-  <!-- PC 버전 -->
-  <div class="pc-version hero">
-    <div class="video-container">
-      <video class="background-video" autoplay muted loop playsinline>
-        <source src="seoulgangnamcity.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="overlay"></div>
-    </div>
-    
-    <img src="Main logo.png" alt="메인 로고" class="main-logo">
-    <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
-    
-    <nav>
-      <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
-    </nav>
-
-    <div class="content">
-      <div class="text-container" style="opacity: 1;">
-        <div class="headline delay-1">자녀 학원비를 환급 받는</div>
-        <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
-        <div class="headline delay-3">제시해 드립니다.</div>
-        <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button">시작하기</a>
-      <div class="subtext">본인확인 없이 환급금 무료 조회</div>
-      <div class="subtext">환급안되면 100% 환불</div>
-
-      <div class="purpose-text" style="display: none; opacity: 0;">
-        <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
-        <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
-        이제 너무 진부해진 표현이 되어 버린 건가요?</p>
-        <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비,<br>
-        서슬 퍼런 은행 대출이자 상환일 등등<br>
-        오늘도 무사히 잘 넘기고 계신지요?</p>
-        <p>아이 교육만큼은 놓지 않으시려는 부모님의 마음, 저희는 잘 알고 있습니다.</p>
-        <p>지불하신 학원비, 조금이라도 돌려받을 수 있도록.<br>
-        복잡한 과정은 저희가 줄이고, 부모님께 도움이 되는 방법만 담았습니다.</p>
-        <p>학부모님의 소중한 가정경제에 도움이 되고자 진심을 다해 돕겠습니다.</p>
-        <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="purpose-button">환급액 조회하기</a>
-      </div>
-    </div>
-    
-    <div class="contact-info">부국강병2100 / 163-26-02070<br>인천 남동구 논고개로123번길 45, 4층<br>CONTACT US  YOUNG WAN KIM <br>+82 70-4837-2782</div>
-    <div class="copyright">2025 © 학원비환급정산 All rights reserved</div>
-  </div>
-  
-  <!-- 모바일 버전 -->
-  <div class="mobile-version hero">
-    <div class="video-container">
-      <video class="background-video" autoplay muted loop playsinline>
-        <source src="seoulgangnamcity.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <div class="overlay"></div>
-    </div>
-    
-    <img src="Main logo.png" alt="메인 로고" class="main-logo">
-    <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
-    
-    <nav>
-      <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
-    </nav>
-
-    <div class="content">
-      <div class="text-container" style="opacity: 1;">
-        <div class="headline delay-1">자녀 학원비를</div>
-        <div class="headline delay-1">환급 받는</div>
-        <div class="headline delay-2">가장 단순하고,</div>
-        <div class="headline delay-2">확실한 방법을</div>
-        <div class="headline delay-3">제시해 드립니다.</div>
-        <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button">시작하기</a>
-      <div class="subtext">본인확인 없이 환급금 무료 조회</div>
-        <div class="subtext">환급안되면 100% 환불</div>
-
-      <div class="purpose-text" style="display: none; opacity: 0;">
-        <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
-        <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
-        이제 너무 진부해진 표현이 되어 버린 건가요?</p>
-        <p>무섭게 다가오는 학원비, 카드 결제일, 매달 어김없이 찾아오는 공과금, 관리비,<br>
-        서슬 퍼런 은행 대출이자 상환일 등등<br>
-        오늘도 무사히 잘 넘기고 계신지요?</p>
-        <p>아이 교육만큼은 놓지 않으시려는 부모님의 마음, 저희는 잘 알고 있습니다.</p>
-        <p>지불하신 학원비, 조금이라도 돌려받을 수 있도록.<br>
-        복잡한 과정은 저희가 줄이고, 부모님께 도움이 되는 방법만 담았습니다.</p>
-        <p>학부모님의 소중한 가정경제에 도움이 되고자 진심을 다해 돕겠습니다.</p>
-        <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="purpose-button">환급액 조회하기</a>
-      </div>
-    </div>
-    
-    <div class="contact-info">부국강병2100 / 163-26-02070<br>인천 남동구 논고개로123번길 45, 4층<br>CONTACT US  YOUNG WAN KIM <br>+82 70-4837-2782</div>
-
-    <div class="copyright">2025 © 학원비환급정산 All rights reserved</div>
-  </div>
-// 화면 크기 변경 시에도 대응
-window.addEventListener('resize', function() {
-  const deviceType = detectDeviceType();
-  
-  if (deviceType === 'mobile') {
-    document.querySelector('.pc-version').style.display = 'none';
-    document.querySelector('.mobile-version').style.display = 'block';
-  } else {
-    document.querySelector('.pc-version').style.display = 'block';
-    document.querySelector('.mobile-version').style.display = 'none';
-  }
-});
 </body>
 </html>

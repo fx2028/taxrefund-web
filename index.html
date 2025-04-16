@@ -384,6 +384,29 @@
       purposeContent.style.display = 'none';
       purposeContent.style.opacity = '0';
       
+      // 버튼 클릭 이벤트 설정
+      document.getElementById('purpose-btn').addEventListener('click', function() {
+        mainContent.style.opacity = '0';
+        setTimeout(function() {
+          mainContent.style.display = 'none';
+          purposeContent.style.display = 'block';
+          setTimeout(function() {
+            purposeContent.style.opacity = '1';
+          }, 10);
+        }, 500);
+      });
+      
+      document.getElementById('back-btn').addEventListener('click', function() {
+        purposeContent.style.opacity = '0';
+        setTimeout(function() {
+          purposeContent.style.display = 'none';
+          mainContent.style.display = 'block';
+          setTimeout(function() {
+            mainContent.style.opacity = '1';
+          }, 10);
+        }, 500);
+      });
+      
       // 비디오 로드 시도
       const video = document.querySelector('.background-video');
       

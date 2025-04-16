@@ -549,6 +549,45 @@ Netlify 대시보드에서 최근 배포 상태 확인
       };
     }
   };
+function toggleSection() {
+  const visibleHero = document.querySelector('.pc-version').style.display !== 'none'
+    ? document.querySelector('.pc-version')
+    : document.querySelector('.mobile-version');
+
+  const textContainer = visibleHero.querySelector('.text-container');
+  const purposeText = visibleHero.querySelector('.purpose-text');
+  const purposeButton = visibleHero.querySelector('.purpose-button');
+
+  if (!textContainer || !purposeText) return;
+
+  const isMainTextVisible = window.getComputedStyle(textContainer).display !== 'none';
+
+  if (isMainTextVisible) {
+    // 기존 텍스트 숨기기
+    textContainer.style.opacity = '0';
+    setTimeout(() => {
+      textContainer.style.display = 'none';
+      purposeText.style.display = 'block';
+      purposeText.style.opacity = '0';
+      setTimeout(() => {
+        purposeText.style.opacity = '1';
+        if (purposeButton) purposeButton.style.opacity = '1';
+      }, 30);
+    }, 400);
+  } else {
+    // 취지 텍스트 숨기기
+    purposeText.style.opacity = '0';
+    if (purposeButton) purposeButton.style.opacity = '0';
+    setTimeout(() => {
+      purposeText.style.display = 'none';
+      textContainer.style.display = 'block';
+      textContainer.style.opacity = '0';
+      setTimeout(() => {
+        textContainer.style.opacity = '1';
+      }, 30);
+    }, 400);
+  }
+}
 </script>
 </body>
 </html>

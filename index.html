@@ -135,8 +135,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+      opacity: 1; /* 변경: 항상 표시되도록 */
       text-decoration: none;
       display: inline-block;
       margin-top: 1.5rem;
@@ -193,7 +192,7 @@
     .purpose-text {
       font-size: 1.25rem;
       line-height: 2;
-      opacity: 0;
+      opacity: 1; /* 변경: 초기값 설정 */
       transition: opacity 0.5s ease;
     }
     
@@ -228,6 +227,11 @@
     }
     .contact-info:hover {
       opacity: 1;
+    }
+    
+    /* 화면 전환 관련 스타일 */
+    .hidden {
+      display: none !important;
     }
     
     /* 모바일 스타일 */
@@ -339,11 +343,11 @@
     <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
     <nav>
-      <button id="toggle-button" class="menu-button">프로젝트의 취지</button>
+      <button id="menuButton" class="menu-button">프로젝트의 취지</button>
     </nav>
 
     <div class="content">
-      <div class="text-container" id="main-content">
+      <div id="mainContent" class="text-container">
         <div class="headline delay-1">자녀 학원비를 환급 받는</div>
         <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
         <div class="headline delay-3">제시해 드립니다.</div>
@@ -352,7 +356,7 @@
         <div class="subtext">환급안되면 100% 환불</div>
       </div>
 
-      <div class="purpose-text" id="purpose-content" style="display: none; opacity: 0;">
+      <div id="purposeContent" class="purpose-text hidden">
         <p><strong>전국의 초등학생 자녀를 둔 학부모님께!</strong></p>
         <p>매년 학원비는 오르는데, 월급만 안 오른다는 말은<br>
         이제 너무 진부해진 표현이 되어 버린 건가요?</p>
@@ -372,88 +376,86 @@
   </div>
 
 <script>
-    // 전역 변수로 상태 관리
-    let isShowingMainContent = true;
-
-    // 토글 함수 정의
-    function toggleSection() {
-      const mainContent = document.getElementById('main-content');
-      const purposeContent = document.getElementById('purpose-content');
-      const toggleButton = document.getElementById('toggle-button');
+  // 페이지가 완전히 로드된 후 실행
+  document.addEventListener('DOMContentLoaded', function() {
+    // 필요한 요소 가져오기
+    const menuButton = document.getElementById('menuButton');
+    const mainContent = document.getElementById('mainContent');
+    const purposeContent = document.getElementById('purposeContent');
+    
+    // 상태 변수
+    let showingMainContent = true;
+    
+    // 메뉴 버튼 클릭 이벤트 핸들러
+    menuButton.addEventListener('click', function() {
+      console.log('메뉴 버튼 클릭됨');
       
-      console.log("Toggle button clicked");
-      
-      if (isShowingMainContent) {
-        // 메인 내용 숨기기
-        mainContent.style.opacity = '0';
-        
-        setTimeout(function() {
-          mainContent.style.display = 'none';
-          purposeContent.style.display = 'block';
-          
-          // 약간의 지연 후 취지 내용 표시
-          setTimeout(function() {
-            purposeContent.style.opacity = '1';
-            // 버튼 텍스트 변경
-            toggleButton.textContent = '메인으로 돌아가기';
-          }, 50);
-        }, 500);
+      if (showingMainContent) {
+        // 메인 컨텐츠를 숨기고 취지 컨텐츠 표시
+        mainContent.classList.add('hidden');
+        purposeContent.classList.remove('hidden');
+        menuButton.textContent = '메인으로 돌아가기';
       } else {
-        // 취지 내용 숨기기
-        purposeContent.style.opacity = '0';
-        
-        setTimeout(function() {
-          purposeContent.style.display = 'none';
-          mainContent.style.display = 'block';
-          
-          // 약간의 지연 후 메인 내용 표시
-          setTimeout(function() {
-            mainContent.style.opacity = '1';
-            // 버튼 텍스트 변경
-            toggleButton.textContent = '프로젝트의 취지';
-          }, 50);
-        }, 500);
+        // 취지 컨텐츠를 숨기고 메인 컨텐츠 표시
+        purposeContent.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+        menuButton.textContent = '프로젝트의 취지';
       }
       
       // 상태 토글
-      isShowingMainContent = !isShowingMainContent;
-    }
-
-    // DOM이 로드된 후 이벤트 리스너 등록
-    document.addEventListener('DOMContentLoaded', function() {
-      // 초기 상태 설정
-      const mainContent = document.getElementById('main-content');
-      const purposeContent = document.getElementById('purpose-content');
-      
-      mainContent.style.display = 'block';
-      mainContent.style.opacity = '1';
-      purposeContent.style.display = 'none';
-      purposeContent.style.opacity = '0';
-      
-      // 버튼에 이벤트 리스너 추가
-      const toggleButton = document.getElementById('toggle-button');
-      if (toggleButton) {
-        // onclick 속성 대신 addEventListener 사용
-        toggleButton.addEventListener('click', toggleSection);
-      } else {
-        console.error("토글 버튼을 찾을 수 없습니다");
-      }
-      
-      // 비디오 로드 시도
-      const video = document.querySelector('.background-video');
-      if (video) {
-        // 비디오 로드 실패 시 처리
-        video.addEventListener('error', function() {
-          document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-        });
-        
-        // iOS Safari 등에서 자동 재생이 실패할 경우
-        video.play().catch(function(error) {
-          console.log("Video play failed:", error);
-          document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-        });
-      }
+      showingMainContent = !showingMainContent;
     });
+    
+    // 비디오 요소 처리
+    const video = document.querySelector('.background-video');
+    if (video) {
+      video.addEventListener('error', function() {
+        console.log('비디오 로드 실패');
+        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+      });
+      
+      video.play().catch(function(error) {
+        console.log('비디오 자동 재생 실패:', error);
+        document.querySelector('.overlay').style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+      });
+    }
+    
+    // 페이지 로드 시 메인 컨텐츠만 표시되도록 초기화
+    mainContent.classList.remove('hidden');
+    purposeContent.classList.add('hidden');
+    menuButton.textContent = '프로젝트의 취지';
+  });
+  
+  // 윈도우 로드 이벤트도 추가하여 모든 리소스가 로드된 후에도 초기화 작업 수행
+  window.onload = function() {
+    console.log('페이지 완전히 로드됨');
+    
+    // 메뉴 버튼에 직접 onClick 이벤트 추가 (중복 방지를 위해 기존 이벤트 제거 후)
+    const menuButton = document.getElementById('menuButton');
+    if (menuButton) {
+      // 혹시 모를 이전 이벤트 제거 (이벤트 중복 방지)
+      const newMenuButton = menuButton.cloneNode(true);
+      menuButton.parentNode.replaceChild(newMenuButton, menuButton);
+      
+      // 새로운 이벤트 리스너 추가
+      newMenuButton.onclick = function() {
+        const mainContent = document.getElementById('mainContent');
+        const purposeContent = document.getElementById('purposeContent');
+        
+        if (mainContent.classList.contains('hidden')) {
+          // 메인으로 돌아가기
+          purposeContent.classList.add('hidden');
+          mainContent.classList.remove('hidden');
+          this.textContent = '프로젝트의 취지';
+        } else {
+          // 취지 보기
+          mainContent.classList.add('hidden');
+          purposeContent.classList.remove('hidden');
+          this.textContent = '메인으로 돌아가기';
+        }
+      };
+    }
+  };
 </script>
 </body>
 </html>

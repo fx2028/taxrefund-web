@@ -271,11 +271,10 @@
       
 @media (max-width: 768px) {
   .taxrefund-logo {
-    width: 44px; /* 원래 80px의 55% */
+    width: 44px; 
     bottom: 50px;
     right: 15px;
   }
-      
       .copyright {
         font-size: 0.7rem;
         bottom: 15px;
@@ -313,10 +312,10 @@
     }
     
     /* 작은 모바일 화면 추가 최적화 */
-    @media (max-width: 480px) {
-      .headline {
-        font-size: 1.8rem;
-      }
+@media (max-width: 480px) {
+  .taxrefund-logo {
+    width: 38.5px;
+  }
       
       .content {
         padding: 0 7%;
@@ -352,34 +351,48 @@
     }
     
     // 페이지 로드 시 적절한 버전 표시
-    window.addEventListener('DOMContentLoaded', function() {
-      const deviceType = detectDeviceType();
+window.addEventListener('DOMContentLoaded', function() {
+  const deviceType = detectDeviceType();
+
+  // PC/모바일 버전 전환 - 명시적으로 설정
+  if(deviceType === 'mobile') {
+    document.querySelector('.pc-version').style.display = 'none';
+    document.querySelector('.mobile-version').style.display = 'block';
+  } else {
+    document.querySelector('.pc-version').style.display = 'block';
+    document.querySelector('.mobile-version').style.display = 'none';
+  }
       
-      // 비디오 로드 및 재생
-      const video = document.querySelector('.background-video');
-      video.play().catch(function(error) {
-        console.log("Video play failed:", error);
-        document.querySelector('.hero').style.backgroundColor = '#000';
-      });
-      
-      // 자동으로 기기 감지하여 클래스 추가
-      document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');
-      
-      // Main logo와 "학" 자가 일직선이 되도록 조정
-      const mainLogo = document.querySelector('.main-logo');
-      const headline = document.querySelector('.headline.delay-1');
-      
-      // DOM이 완전히 로드된 후에 위치 조정
-      setTimeout(function() {
-        const headlineRect = headline.getBoundingClientRect();
-        const logoRect = mainLogo.getBoundingClientRect();
-        
-        // PC 버전에서만 조정
-        if(window.innerWidth > 768) {
-          mainLogo.style.left = headlineRect.left + 'px';
-        }
-      }, 100);
-    });
+  // 비디오 로드 및 재생
+  const video = document.querySelector('.background-video');
+  video.play().catch(function(error) {
+    console.log("Video play failed:", error);
+    document.querySelector('.hero').style.backgroundColor = '#000';
+    document.querySelector('.video-container').style.opacity = '0.3';
+    
+    // 콘텐츠를 확실히 보이게 함
+    document.querySelector('.content').style.zIndex = '10';
+    document.querySelector('.text-container').style.opacity = '1';
+  });
+  
+  // 자동으로 기기 감지하여 클래스 추가
+  document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');
+  
+  // Main logo와 "학" 자가 일직선이 되도록 조정
+  const mainLogo = document.querySelector('.main-logo');
+  const headline = document.querySelector('.headline.delay-1');
+  
+  // DOM이 완전히 로드된 후에 위치 조정
+  setTimeout(function() {
+    const headlineRect = headline.getBoundingClientRect();
+    const logoRect = mainLogo.getBoundingClientRect();
+    
+    // PC 버전에서만 조정
+    if(window.innerWidth > 768) {
+      mainLogo.style.left = headlineRect.left + 'px';
+    }
+  }, 100);
+});
 
     function toggleSection() {
       // 현재 활성화된 버전 확인 (PC 또는 모바일)

@@ -550,6 +550,7 @@ Netlify 대시보드에서 최근 배포 상태 확인
     }
   };
 function toggleSection() {
+  // 어떤 버전이 보이는지 체크
   const visibleHero = document.querySelector('.pc-version').style.display !== 'none'
     ? document.querySelector('.pc-version')
     : document.querySelector('.mobile-version');
@@ -558,12 +559,13 @@ function toggleSection() {
   const purposeText = visibleHero.querySelector('.purpose-text');
   const purposeButton = visibleHero.querySelector('.purpose-button');
 
+  // 필수 요소 없으면 종료
   if (!textContainer || !purposeText) return;
 
-  const isMainTextVisible = window.getComputedStyle(textContainer).display !== 'none';
+  const isTextVisible = window.getComputedStyle(textContainer).display !== 'none';
 
-  if (isMainTextVisible) {
-    // 기존 텍스트 숨기기
+  if (isTextVisible) {
+    // 기존 텍스트 숨기고, 취지 보여주기
     textContainer.style.opacity = '0';
     setTimeout(() => {
       textContainer.style.display = 'none';
@@ -573,9 +575,9 @@ function toggleSection() {
         purposeText.style.opacity = '1';
         if (purposeButton) purposeButton.style.opacity = '1';
       }, 30);
-    }, 400);
+    }, 300);
   } else {
-    // 취지 텍스트 숨기기
+    // 취지 숨기고, 기존 텍스트 다시 보여주기
     purposeText.style.opacity = '0';
     if (purposeButton) purposeButton.style.opacity = '0';
     setTimeout(() => {
@@ -585,9 +587,10 @@ function toggleSection() {
       setTimeout(() => {
         textContainer.style.opacity = '1';
       }, 30);
-    }, 400);
+    }, 300);
   }
 }
+
 </script>
 </body>
 </html>

@@ -422,43 +422,44 @@
       });
     });
 
-function toggleSection() {
-  // querySelector에서 getElementById로 변경하여 정확히 요소를 찾도록 보장
-  const mainContent = document.getElementById('main-content');
-  const purposeContent = document.getElementById('purpose-content');
-  
-  console.log("Toggle button clicked"); // 디버깅용
-  console.log("Main content opacity:", window.getComputedStyle(mainContent).opacity);
-  
-  // 메인 컨텐츠가 현재 보이는 경우 (opacity 체크 대신 display 속성을 확인)
-  if (mainContent.style.display !== 'none') {
-    console.log("Showing purpose content");
-    // 메인 컨텐츠 숨기기
-    mainContent.style.opacity = '0';
-    
-    setTimeout(function() {
-      mainContent.style.display = 'none';
-      purposeContent.style.display = 'block';
+    // toggleSection 함수를 script 태그 안으로 이동
+    function toggleSection() {
+      // querySelector에서 getElementById로 변경하여 정확히 요소를 찾도록 보장
+      const mainContent = document.getElementById('main-content');
+      const purposeContent = document.getElementById('purpose-content');
       
-      setTimeout(function() {
-        purposeContent.style.opacity = '1';
-      }, 50);
-    }, 500);
-  } else {
-    console.log("Showing main content");
-    // 취지 컨텐츠 숨기기
-    purposeContent.style.opacity = '0';
-    
-    setTimeout(function() {
-      purposeContent.style.display = 'none';
-      mainContent.style.display = 'block';
+      console.log("Toggle button clicked"); // 디버깅용
+      console.log("Main content opacity:", window.getComputedStyle(mainContent).opacity);
       
-      setTimeout(function() {
-        mainContent.style.opacity = '1';
-      }, 50);
-    }, 500);
-  }
-}
-  </script>
+      // 메인 컨텐츠가 현재 보이는 경우 (opacity 체크 대신 display 속성을 확인)
+      if (mainContent.style.display !== 'none') {
+        console.log("Showing purpose content");
+        // 메인 컨텐츠 숨기기
+        mainContent.style.opacity = '0';
+        
+        setTimeout(function() {
+          mainContent.style.display = 'none';
+          purposeContent.style.display = 'block';
+          
+          setTimeout(function() {
+            purposeContent.style.opacity = '1';
+          }, 50);
+        }, 500);
+      } else {
+        console.log("Showing main content");
+        // 취지 컨텐츠 숨기기
+        purposeContent.style.opacity = '0';
+        
+        setTimeout(function() {
+          purposeContent.style.display = 'none';
+          mainContent.style.display = 'block';
+          
+          setTimeout(function() {
+            mainContent.style.opacity = '1';
+          }, 50);
+        }, 500);
+      }
+    }
+</script>
 </body>
 </html>

@@ -339,7 +339,7 @@
     <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
     <nav>
-      <button onclick="toggleSection()" class="menu-button">프로젝트의 취지</button>
+      <button id="toggle-button" class="menu-button">프로젝트의 취지</button>
     </nav>
 
     <div class="content">
@@ -372,54 +372,71 @@
   </div>
 
 <script>
- // 페이지 로드 시 즉시 실행
+    // 전역 변수로 상태 관리
+    let isShowingMainContent = true;
+
+    // 토글 함수 정의
+    function toggleSection() {
+      const mainContent = document.getElementById('main-content');
+      const purposeContent = document.getElementById('purpose-content');
+      const toggleButton = document.getElementById('toggle-button');
+      
+      console.log("Toggle button clicked");
+      
+      if (isShowingMainContent) {
+        // 메인 내용 숨기기
+        mainContent.style.opacity = '0';
+        
+        setTimeout(function() {
+          mainContent.style.display = 'none';
+          purposeContent.style.display = 'block';
+          
+          // 약간의 지연 후 취지 내용 표시
+          setTimeout(function() {
+            purposeContent.style.opacity = '1';
+            // 버튼 텍스트 변경
+            toggleButton.textContent = '메인으로 돌아가기';
+          }, 50);
+        }, 500);
+      } else {
+        // 취지 내용 숨기기
+        purposeContent.style.opacity = '0';
+        
+        setTimeout(function() {
+          purposeContent.style.display = 'none';
+          mainContent.style.display = 'block';
+          
+          // 약간의 지연 후 메인 내용 표시
+          setTimeout(function() {
+            mainContent.style.opacity = '1';
+            // 버튼 텍스트 변경
+            toggleButton.textContent = '프로젝트의 취지';
+          }, 50);
+        }, 500);
+      }
+      
+      // 상태 토글
+      isShowingMainContent = !isShowingMainContent;
+    }
+
+    // DOM이 로드된 후 이벤트 리스너 등록
     document.addEventListener('DOMContentLoaded', function() {
-      // 초기 상태 명확하게 설정
+      // 초기 상태 설정
       const mainContent = document.getElementById('main-content');
       const purposeContent = document.getElementById('purpose-content');
       
-      // 초기 상태 명시적 설정
       mainContent.style.display = 'block';
       mainContent.style.opacity = '1';
       purposeContent.style.display = 'none';
       purposeContent.style.opacity = '0';
       
-      // 버튼 요소 가져오기
-      const purposeBtn = document.getElementById('purpose-btn');
-      const backBtn = document.getElementById('back-btn');
-      
-      // 환급취지 버튼 클릭 이벤트
-      if (purposeBtn) {
-        purposeBtn.addEventListener('click', function() {
-          console.log("Purpose button clicked");
-          mainContent.style.opacity = '0';
-          setTimeout(function() {
-            mainContent.style.display = 'none';
-            purposeContent.style.display = 'block';
-            setTimeout(function() {
-              purposeContent.style.opacity = '1';
-            }, 10);
-          }, 500);
-        });
+      // 버튼에 이벤트 리스너 추가
+      const toggleButton = document.getElementById('toggle-button');
+      if (toggleButton) {
+        // onclick 속성 대신 addEventListener 사용
+        toggleButton.addEventListener('click', toggleSection);
       } else {
-        console.error("환급취지 버튼을 찾을 수 없습니다");
-      }
-      
-      // 돌아가기 버튼 클릭 이벤트
-      if (backBtn) {
-        backBtn.addEventListener('click', function() {
-          console.log("Back button clicked");
-          purposeContent.style.opacity = '0';
-          setTimeout(function() {
-            purposeContent.style.display = 'none';
-            mainContent.style.display = 'block';
-            setTimeout(function() {
-              mainContent.style.opacity = '1';
-            }, 10);
-          }, 500);
-        });
-      } else {
-        console.error("돌아가기 버튼을 찾을 수 없습니다");
+        console.error("토글 버튼을 찾을 수 없습니다");
       }
       
       // 비디오 로드 시도
@@ -437,45 +454,6 @@
         });
       }
     });
-
-    // toggleSection 함수를 script 태그 안으로 이동
-    function toggleSection() {
-      // querySelector에서 getElementById로 변경하여 정확히 요소를 찾도록 보장
-      const mainContent = document.getElementById('main-content');
-      const purposeContent = document.getElementById('purpose-content');
-      
-      console.log("Toggle button clicked"); // 디버깅용
-      console.log("Main content opacity:", window.getComputedStyle(mainContent).opacity);
-      
-      // 메인 컨텐츠가 현재 보이는 경우 (opacity 체크 대신 display 속성을 확인)
-      if (mainContent.style.display !== 'none') {
-        console.log("Showing purpose content");
-        // 메인 컨텐츠 숨기기
-        mainContent.style.opacity = '0';
-        
-        setTimeout(function() {
-          mainContent.style.display = 'none';
-          purposeContent.style.display = 'block';
-          
-          setTimeout(function() {
-            purposeContent.style.opacity = '1';
-          }, 50);
-        }, 500);
-      } else {
-        console.log("Showing main content");
-        // 취지 컨텐츠 숨기기
-        purposeContent.style.opacity = '0';
-        
-        setTimeout(function() {
-          purposeContent.style.display = 'none';
-          mainContent.style.display = 'block';
-          
-          setTimeout(function() {
-            mainContent.style.opacity = '1';
-          }, 50);
-        }, 500);
-      }
-    }
 </script>
 </body>
 </html>

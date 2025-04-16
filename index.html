@@ -339,47 +339,71 @@
         font-size: 0.6rem;
       }
     }
+/* 모바일에서 콘텐츠가 항상 보이도록 설정 */
+@media (max-width: 768px) {
+  .content {
+    z-index: 10 !important;
+  }
+  .text-container {
+    opacity: 1 !important;
+  }
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.75); /* 어두운 배경으로 콘텐츠가 잘 보이게 함 */
+  }
+}
   </style>
   <script>
-    // 기기 타입 감지
-    function detectDeviceType() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      if (/android|iPad|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
-        return 'mobile';
-      }
-      return 'desktop';
-    }
+// 기기 타입 감지
+function detectDeviceType() {
+  // 화면 크기로도 판단
+  if (window.innerWidth <= 768) return 'mobile';
+  
+  // 기존 UserAgent 감지도 유지
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  if (/android|iPad|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)) {
+    return 'mobile';
+  }
+  return 'desktop';
+}
     
-    // 페이지 로드 시 적절한 버전 표시
+// 페이지 로드 시 바로 콘텐츠 표시
 window.addEventListener('DOMContentLoaded', function() {
   const deviceType = detectDeviceType();
-
-  // PC/모바일 버전 전환 - 명시적으로 설정
+  console.log("Detected device type:", deviceType); // 디버깅용
+  
+  // 명확하게 display 속성 설정
   if(deviceType === 'mobile') {
     document.querySelector('.pc-version').style.display = 'none';
     document.querySelector('.mobile-version').style.display = 'block';
+    console.log("Mobile version activated");
   } else {
     document.querySelector('.pc-version').style.display = 'block';
     document.querySelector('.mobile-version').style.display = 'none';
+    console.log("PC version activated");
   }
-      
-  // 비디오 로드 및 재생
-  const video = document.querySelector('.background-video');
-if (video) {
-  video.play().catch(function(error) {
-    console.log("Video play failed:", error);
-    document.querySelector('.hero').style.backgroundColor = '#000';
-    document.querySelector('.video-container').style.opacity = '0.3';
-    
-    // 콘텐츠를 확실히 보이게 함
-    const content = document.querySelector('.content');
-    const textContainer = document.querySelector('.text-container');
-    content.style.display = 'flex';       // ✅ 콘텐츠 표시
+  
+  // 모든 콘텐츠가 항상 보이도록 설정
+  document.querySelectorAll('.content').forEach(function(content) {
     content.style.zIndex = '10';
-    textContainer.style.display = 'block'; // ✅ 텍스트 표시
-    textContainer.style.opacity = '1';
   });
-}
+  
+  document.querySelectorAll('.text-container').forEach(function(container) {
+    container.style.opacity = '1';
+  });
+  
+  // 비디오 로드 및 재생 
+  const videos = document.querySelectorAll('.background-video');
+  videos.forEach(function(video) {
+    video.play().catch(function(error) {
+      console.log("Video play failed:", error);
+      // 오류 시 더 진한 오버레이 적용
+      document.querySelectorAll('.overlay').forEach(function(overlay) {
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.75)';
+      });
+    });
+  });
+  
+
   
   // 자동으로 기기 감지하여 클래스 추가
   document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');
@@ -552,5 +576,17 @@ if (video) {
 
     <div class="copyright">2025 © 학원비환급정산 All rights reserved</div>
   </div>
+// 화면 크기 변경 시에도 대응
+window.addEventListener('resize', function() {
+  const deviceType = detectDeviceType();
+  
+  if (deviceType === 'mobile') {
+    document.querySelector('.pc-version').style.display = 'none';
+    document.querySelector('.mobile-version').style.display = 'block';
+  } else {
+    document.querySelector('.pc-version').style.display = 'block';
+    document.querySelector('.mobile-version').style.display = 'none';
+  }
+});
 </body>
 </html>

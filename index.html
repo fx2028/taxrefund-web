@@ -365,15 +365,21 @@ window.addEventListener('DOMContentLoaded', function() {
       
   // 비디오 로드 및 재생
   const video = document.querySelector('.background-video');
+if (video) {
   video.play().catch(function(error) {
     console.log("Video play failed:", error);
     document.querySelector('.hero').style.backgroundColor = '#000';
     document.querySelector('.video-container').style.opacity = '0.3';
     
     // 콘텐츠를 확실히 보이게 함
-    document.querySelector('.content').style.zIndex = '10';
-    document.querySelector('.text-container').style.opacity = '1';
+    const content = document.querySelector('.content');
+    const textContainer = document.querySelector('.text-container');
+    content.style.display = 'flex';       // ✅ 콘텐츠 표시
+    content.style.zIndex = '10';
+    textContainer.style.display = 'block'; // ✅ 텍스트 표시
+    textContainer.style.opacity = '1';
   });
+}
   
   // 자동으로 기기 감지하여 클래스 추가
   document.body.classList.add(deviceType === 'mobile' ? 'mobile-view' : 'desktop-view');

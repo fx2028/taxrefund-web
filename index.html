@@ -390,7 +390,7 @@
       </div>
 
     </div>
-    <div class="contact-info">부국강병2100 / 163-26-02070<br>인천 남동구 논고개로123번길 45, 4층<br>CONTACT US  YOUNG WAN KIM <br>+82 70-4837-2782</div>
+    <div class="contact-info">업종: 경영컨설팅/세무자문업<br>부국강병2100 / 163-26-02070<br>인천 남동구 논고개로123번길 45, 4층<br>CONTACT US  YOUNG WAN KIM <br>+82 70-4837-2782</div>
     <div class="copyright">2025 © 학원비환급정산 All rights reserved</div>
   </div>
 
@@ -408,22 +408,37 @@
     const newMenuButton = menuButton.cloneNode(true);
     menuButton.parentNode.replaceChild(newMenuButton, menuButton);
     
-    // 상태 변수 (전역으로 접근 가능)
-    window.appState = {
-      showingMainContent: true
-    };
+  // 앱 상태를 전역 객체로 관리
+  window.appState = {
+    showingMainContent: true,
+    appInitialized: false
+  };
+
+  // 모든 이벤트 핸들러 통합
+  function initApp() {
+    // 이미 초기화되었으면 중복 실행 방지
+    if(window.appState.appInitialized) {
+      return;
+    }
     
-    // 모바일 터치 이벤트 추가
-    newMenuButton.addEventListener('touchend', handleMenuToggle);
-    // 클릭 이벤트 추가
-    newMenuButton.addEventListener('click', handleMenuToggle);
+    console.log('앱 초기화 시작');
     
+    // 필요한 요소 가져오기
+    const menuButton = document.getElementById('menuButton');
+    const mainContent = document.getElementById('mainContent');
+    const purposeContent = document.getElementById('purposeContent');
+    
+    if(!menuButton || !mainContent || !purposeContent) {
+      console.error('필요한 요소를 찾을 수 없습니다');
+      return;
+    }
+    
+    // 메뉴 토글 핸들러 함수
     function handleMenuToggle(e) {
       // 기본 이벤트 동작 방지
       e.preventDefault();
-      e.stopPropagation();
       
-      console.log('메뉴 토글: 현재 메인 콘텐츠 표시 =', window.appState.showingMainContent);
+      console.log('메뉴 토글 클릭됨');
       
       if (window.appState.showingMainContent) {
         // 메인 콘텐츠 숨기기
@@ -431,20 +446,29 @@
         // 취지 콘텐츠 표시
         purposeContent.classList.remove('hidden');
         // 버튼 텍스트 변경
-        newMenuButton.textContent = '메인으로 돌아가기';
+        menuButton.textContent = '메인으로 돌아가기';
       } else {
         // 취지 콘텐츠 숨기기
         purposeContent.classList.add('hidden');
         // 메인 콘텐츠 표시
         mainContent.classList.remove('hidden');
         // 버튼 텍스트 변경
-        newMenuButton.textContent = '프로젝트의 취지';
+        menuButton.textContent = '프로젝트의 취지';
       }
       
       // 상태 업데이트
       window.appState.showingMainContent = !window.appState.showingMainContent;
       console.log('메뉴 토글 완료: 메인 콘텐츠 표시 =', window.appState.showingMainContent);
     }
+    
+    // 이벤트 리스너 직접 추가 (클론 없이)
+    menuButton.addEventListener('click', handleMenuToggle);
+    
+    // 모바일 터치 지원
+    menuButton.addEventListener('touchend', function(e) {
+      e.preventDefault();
+      handleMenuToggle(e);
+    });
     
     // 비디오 처리
     const video = document.querySelector('.background-video');
@@ -463,25 +487,22 @@
     // 페이지 로드 시 초기 상태 설정
     mainContent.classList.remove('hidden');
     purposeContent.classList.add('hidden');
-    newMenuButton.textContent = '프로젝트의 취지';
+    menuButton.textContent = '프로젝트의 취지';
     
+    // 초기화 완료 표시
+    window.appState.appInitialized = true;
     console.log('앱 초기화 완료');
   }
 
-  // 페이지 로드 완료 시 초기화 함수 호출 (DOMContentLoaded)
+  // DOMContentLoaded 이벤트로 초기화
   document.addEventListener('DOMContentLoaded', initApp);
   
-  // 이중 안전장치: window.onload에서도 초기화 (모든 리소스가 로드된 후)
-  window.onload = function() {
-    // DOMContentLoaded에서 이미 초기화했을 수 있지만, 확실하게 하기 위해 다시 확인
-    if (!window.appInitialized) {
+  // 백업: window.onload에서도 초기화
+  window.addEventListener('load', function() {
+    if (!window.appState.appInitialized) {
       console.log('window.onload에서 앱 초기화');
       initApp();
-      window.appInitialized = true;
     }
-  };
-  
-  // 오래된 toggleSection 함수는 제거 (더 이상 사용하지 않음)
+  });
 </script>
-</body>
 </html>

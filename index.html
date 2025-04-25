@@ -245,7 +245,32 @@
     .hidden {
       display: none !important;
     }
-    
+
+    /* 추가된 Jeeinacct 로고와 문구 스타일 */
+
+  .jeein-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.5s;
+  }
+  .jeein-logo {
+    height: 25px;
+    margin-right: 10px;
+  }
+  
+  .jeein-text {
+    color: white;
+    font-size: 1rem;
+    font-weight: 300;
+    white-space: nowrap;
+  }
+
     /* 모바일 스타일 */
     @media (max-width: 768px) {
       .headline {
@@ -317,6 +342,21 @@
       }
     }
     
+      /* 모바일에서 Jeeinacct 로고와 문구 조정 */
+      .jeein-container {
+        top: 65px;
+        right: 15px;
+      }
+      
+      .jeein-logo {
+        height: 25px;
+      }
+      
+      .jeein-text {
+        font-size: 0.8rem;
+      }
+    }
+
     /* 작은 모바일 화면 추가 최적화 */
     @media (max-width: 480px) {
       .content {
@@ -339,6 +379,41 @@
         font-size: 0.6rem;
       }
     }
+
+
+  /* Position Jeeinacct at the top of the headline text */
+  .jeein-container {
+    position: absolute;
+    top: 10vh; /* Position at the top section where headline starts */
+    left: 25%; /* Match the headline's left margin */
+    display: flex;
+    align-items: center;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.5s;
+  }
+  
+  .jeein-logo {
+    height: 25px;
+    margin-right: 10px;
+  }
+  
+  .jeein-text {
+    color: white;
+    font-size: 1rem;
+    font-weight: 300;
+    white-space: nowrap;
+  }
+  
+  /* Adjust for mobile */
+  @media (max-width: 768px) {
+    .jeein-container {
+      left: 17.5%; /* Match mobile content padding */
+      top: 15vh; /* Adjusted for mobile */
+    }
+  }
+
 /* 기존 스타일 유지하고 아래 추가 */
     #mainContent, #purposeContent {
       transition: opacity 0.3s ease;
@@ -368,6 +443,12 @@
     <img src="Main logo.png" alt="메인 로고" class="main-logo">
     <img src="taxrefund logo.png" alt="세금환급 로고" class="taxrefund-logo">
     
+    <!-- 추가된 Jeeinacct 로고와 문구 -->
+<div class="jeein-container">
+  <img src="Jeeinacct.png" alt="지인회계" class="jeein-logo">
+  <span class="jeein-text">과 함께 합니다.</span>
+</div>
+
     <nav>
       <button id="menuButton" class="menu-button" onclick="toggleView()">프로젝트의 취지</button>
     </nav>
@@ -390,7 +471,7 @@
         <li>본인확인/회원가입 없이 <strong>시작하기</strong> 버튼</li>
         <li>환급금 <strong>최대금액 무료조회</strong></li>
         <li><strong>환급금 신청하기</strong> 클릭</li>
-        <li><strong>수수료 결제 후</strong> 환급금 입금액 확인하기</li>
+        <li><strong>환급금 경정청구 후</strong> 환급금 입금액 확인하기</li>
       </ol>
     </div>
   </div>

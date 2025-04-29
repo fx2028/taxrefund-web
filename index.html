@@ -128,8 +128,10 @@
       animation: fadeIn 1s ease forwards;
       animation-delay: 4.5s;
       text-decoration: none;
-      display: inline-block;
-      margin-top: 1rem;
+      display: block; /* 변경: inline-block에서 block으로 */
+      margin: 1rem auto 0; /* 변경: 중앙 정렬을 위해 margin 조정 */
+      text-align: center; /* 버튼 텍스트 중앙 정렬 */
+      max-width: 300px; /* 버튼 최대 너비 설정 */
     }
     .subtext {
       font-size: 0.8rem;
@@ -138,6 +140,7 @@
       opacity: 0;
       animation: fadeIn 1s ease forwards;
       animation-delay: 5.2s;
+      text-align: center; /* 텍스트 중앙 정렬 */
     }
     .purpose-button {
       background-color: white;
@@ -149,8 +152,10 @@
       cursor: pointer;
       opacity: 1; /* 변경: 항상 표시되도록 */
       text-decoration: none;
-      display: inline-block;
-      margin-top: 1.5rem;
+      display: block; /* 변경: inline-block에서 block으로 */
+      margin: 1.5rem auto 0; /* 변경: 중앙 정렬을 위해 margin 조정 */
+      text-align: center; /* 버튼 텍스트 중앙 정렬 */
+      max-width: 300px; /* 버튼 최대 너비 설정 */
     }
     .button:hover, .purpose-button:hover {
       background-color: #eee;
@@ -271,6 +276,13 @@
     white-space: nowrap;
   }
 
+    /* 환급 절차 안내 중앙 정렬 */
+    .refund-inline-guide {
+      text-align: center;
+      margin: 1rem auto 0;
+      max-width: 500px;
+    }
+
     /* 모바일 스타일 */
     @media (max-width: 768px) {
       .headline {
@@ -281,6 +293,7 @@
       .button, .purpose-button {
         padding: 0.6rem 1.2rem;
         font-size: 1rem;
+        max-width: 250px; /* 모바일에서 버튼 너비 조정 */
       }
       
       .main-logo {
@@ -460,15 +473,15 @@
     <div class="headline delay-2">가장 단순하고, 확실한 방법을</div>
     <div class="headline delay-3">제시해 드립니다.</div>
     <a href="https://oos-refund-project-3a158.web.app" target="_blank" class="button" onclick="gtag('event', 'conversion_event_outbound_click', {event_category: 'outbound', event_label: '시작하기 버튼'})">
-      시작하기
+      본인인증 없이 환급금 조회
     </a>
     <div class="subtext">환급안되면 100% 환불</div>
     
     <!-- 환급 절차 안내 -->
     <div class="refund-inline-guide" style="font-size: 0.85rem; color: #ccc; margin-top: 1rem; line-height: 1.6;">
       <p style="margin: 0.5rem 0;"><strong>💸 환급정산 환급금 수령 절차</strong></p>
-      <ol style="margin: 0; padding-left: 1.2rem;">
-        <li>본인확인/회원가입 없이 <strong>시작하기</strong> 버튼</li>
+      <ol style="margin: 0; padding-left: 1.2rem; text-align: left; display: inline-block;">
+        <li>본인확인/회원가입 없이 <strong>환급금 조회</strong> 버튼</li>
         <li>환급금 <strong>최대금액 무료조회</strong></li>
         <li><strong>환급금 신청하기</strong> 클릭</li>
         <li><strong>환급금 경정청구 후</strong> 환급금 입금액 확인하기</li>
